@@ -1,8 +1,9 @@
 import { Link } from "react-router-dom"
+import { Types } from "./Types"
 
-export const PokeBasicInfo = ({ id, pokemonName, img }) => {
+export const PokeBasicInfo = ({ id, pokemonName, img, types }) => {
 
-    
+  
 
 
     return (
@@ -10,9 +11,19 @@ export const PokeBasicInfo = ({ id, pokemonName, img }) => {
             {/* <div > */}
                 <div className="p-6 bg-gray-800 rounded-lg bg-opacity-40">
                     <img className="object-cover object-center w-full h-auto mb-6 rounded" src={img} alt={`Pokemon ${pokemonName}`} />
-                    <span className='pokemon-id'>N° {id}</span>
+                    <p className='text-center'>N° {id}</p>
                     <h3 className="text-lg font-medium tracking-widest text-center text-indigo-400 title-font">{pokemonName}</h3>
-                    <p className="text-base leading-relaxed">Fingerstache flexitarian street art 8-bit waistcoat. Distillery hexagon disrupt edison bulbche.</p>
+                    {/* {JSON.stringify(types[0].type.name)} */}
+                    <div className="flex justify-center">
+                    {
+                            types.map((item)=>{
+                                return <Types key={item.slot} type={item.type.name}/>
+                            })
+                        }
+                    </div>
+                   
+                    
+                    {/* <p className="text-base leading-relaxed">Fingerstache flexitarian street art 8-bit waistcoat. Distillery hexagon disrupt edison bulbche.</p> */}
                 </div>
             {/* </div> */}
     

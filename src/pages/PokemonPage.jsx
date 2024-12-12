@@ -4,6 +4,7 @@ import { useContext, useState } from "react"
 import { PokemonContext } from "../context/PokemonContext"
 import { useParams } from "react-router-dom";
 import { useEffect } from "react";
+import { Stats, Types } from "../components";
 
 
 export const PokemonPage = () => {
@@ -26,82 +27,33 @@ export const PokemonPage = () => {
 
     return (
         <>
-            <div className='header-main-pokemonDetail?'>
-                <span className='number-pokemonDetail?'>#{pokemonDetail?.id}</span>
-                <div className='container-img-pokemonDetail?'>
-                    <img
-                        src={pokemonDetail?.sprites.other.dream_world.front_default}
-                        alt={`pokemonDetail? ${pokemonDetail?.name}`}
-                    />
-                </div>
 
-                <div className='container-info-pokemonDetail?'>
-                    {/* <h1>{primerMayuscula(pokemonDetail?.name)}</h1> */}
-                    <div className='card-types info-pokemonDetail?-type'>
-                        {pokemonDetail?.types.map(type => (
-                            <span key={type.type.name} className={`${type.type.name}`}>
-                                {type.type.name}
-                            </span>
-                        ))}
-                    </div>
-                    <div className='info-pokemonDetail?'>
-                        <div className='group-info'>
-                            <p>Altura</p>
-                            <span>{pokemonDetail?.height}</span>
-                        </div>
-                        <div className='group-info'>
-                            <p>Peso</p>
-                            <span>{pokemonDetail?.weight}KG</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
-            <div className='container-stats'>
-                <h1>Estadísticas</h1>
-                <div className='stats'>
-                    <div className='stat-group'>
-                        <span>Hp</span>
-                        <div className='progress-bar'></div>
-                        <span className='counter-stat'>
-                            {pokemonDetail?.stats[0].base_stat}
-                        </span>
+
+            <div class=" mx-auto max-w-sm rounded-lg shadow bg-gray-800 border-gray-700">
+                <img className="rounded-t-lg"
+                    src={pokemonDetail?.sprites.other["official-artwork"].front_default}
+                    alt={`pokemonDetail ${pokemonDetail?.name}`}
+                />
+
+                <div class="p-5">
+                    <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white capitalize">{pokemonDetail?.name}</h5>
+                    <div className="flex justify-center">
+                        {
+                            pokemonDetail?.types.map((item) => {
+                                return <Types key={item.slot} type={item.type.name} />
+                            })
+                        }
                     </div>
-                    <div className='stat-group'>
-                        <span>Attack</span>
-                        <div className='progress-bar'></div>
-                        <span className='counter-stat'>
-                            {pokemonDetail?.stats[1].base_stat}
-                        </span>
+                    <div className="flex flex-col flex-nowrap">
+                        {
+                            pokemonDetail?.stats.map(item => {
+                                return <Stats key={item.stat.name} base={item.base_stat} name={item.stat.name} />
+                            })
+                        }
                     </div>
-                    <div className='stat-group'>
-                        <span>Defense</span>
-                        <div className='progress-bar'></div>
-                        <span className='counter-stat'>
-                            {pokemonDetail?.stats[2].base_stat}
-                        </span>
-                    </div>
-                    <div className='stat-group'>
-                        <span>Special Attack</span>
-                        <div className='progress-bar'></div>
-                        <span className='counter-stat'>
-                            {pokemonDetail?.stats[3].base_stat}
-                        </span>
-                    </div>
-                    <div className='stat-group'>
-                        <span>Special Defense</span>
-                        <div className='progress-bar'></div>
-                        <span className='counter-stat'>
-                            {pokemonDetail?.stats[4].base_stat}
-                        </span>
-                    </div>
-                    <div className='stat-group'>
-                        <span>Speed</span>
-                        <div className='progress-bar'></div>
-                        <span className='counter-stat'>
-                            {pokemonDetail?.stats[5].base_stat}
-                        </span>
-                    </div>
+                    {/* <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Here are the biggest enterprise technology acquisitions of 2021 so far, in reverse chronological order.</p> */}
+
                 </div>
             </div>
         </>
